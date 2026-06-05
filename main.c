@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 #define WIDTH 80
 #define HEIGHT 24
@@ -57,3 +58,34 @@ void drawLine(int x1, int y1, int x2, int y2)
         y += yIncrement;
     }
 }
+void drawRectangle(int x1, int y1, int x2, int y2)
+{
+    drawLine(x1, y1, x2, y1); // Top
+    drawLine(x1, y2, x2, y2); // Bottom
+    drawLine(x1, y1, x1, y2); // Left
+    drawLine(x2, y1, x2, y2); // Right
+}
+void drawTriangle(int x1, int y1,
+                  int x2, int y2,
+                  int x3, int y3)
+{
+    drawLine(x1, y1, x2, y2);
+    drawLine(x2, y2, x3, y3);
+    drawLine(x3, y3, x1, y1);
+}
+
+void drawCircle(int cx, int cy, int radius)
+{
+    int angle;
+
+    for(angle = 0; angle < 360; angle++)
+    {
+        double rad = angle * 3.14159265 / 180.0;
+
+        int x = cx + (int)(radius * cos(rad));
+        int y = cy + (int)(radius * sin(rad));
+
+        setPixel(x, y);
+    }
+}
+
